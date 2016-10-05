@@ -8,7 +8,7 @@
 - Didn't care a lot about desing, but it was built using bootstrap.
 
 ##Logging
-- Implemented using NLog. Never used before, so it was interesting to try.
+- Implemented using NLog. Never used it before, so was interesting to try it ;)
 - Support request tracing [Framwork/LoggingHandler.cs] and unhandled exceptions [Framwork/UnhandledExceptionFilterAttribute.cs]
 
 ##Unit Testing
