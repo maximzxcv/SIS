@@ -4,13 +4,13 @@
 - MidiaFormat supporting implemented in WebApiConfig.cs.
 
 ##Interface
-Implemented using Angular. Controller can be find in scripts/app/RetrospectiveService.js
-Didn't care a lot about desing, but it was built using bootstrap.
+- Implemented using Angular. Controller can be find in scripts/app/RetrospectiveService.js
+- Didn't care a lot about desing, but it was built using bootstrap.
 
 ##Logging
-Implemented using NLog. Never used before, so it was interesting to try.
-Support request tracing [Framwork/LoggingHandler.cs] and unhandled exceptions [Framwork/UnhandledExceptionFilterAttribute.cs]
+- Implemented using NLog. Never used before, so it was interesting to try.
+- Support request tracing [Framwork/LoggingHandler.cs] and unhandled exceptions [Framwork/UnhandledExceptionFilterAttribute.cs]
 
 ##Unit Testing
-Covers some functionality for retrospective CRUD service. 
+- Covers some functionality for retrospective CRUD service. 
 
