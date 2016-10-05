@@ -1,0 +1,138 @@
+﻿@using Sis.Interview.Models.ScrumCeremony
+
+@section Scripts{
+    <script src="~/Scripts/app/RetrospectiveService.js"></script>
+}
+
+
+<div class="container" ng-app="MyApp">
+    <div ng-controller="RetrospectiveController">
+        @FeedbackForm()
+        @RetrospectiveForm()
+        <table class="table table-bordered table-striped table-responsive">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Participants</th>
+                <th>Feeds</th>
+                <th> </th>
+            </tr>
+            <tr ng-repeat="retrospective in retrospectives">
+                <td>{{retrospective.Name}}</td>
+                <td>{{retrospective.Date | date : 'dd-MM-yyyy'}}</td>
+                <td>{{retrospective.Participants}}</td>
+                <td>
+                    <div ng-repeat="feed in retrospective.Feedbacks">
+                        {{feed.NameCreatedBy}}:{{feed.TypeString}}
+                    </div>
+                </td>
+                <td>
+                    <a class="text-primary modal-link" href="" ng-click="addFeedback(retrospective.Name)" data-target="#modal-feedback" data-toggle="modal">add feed</a>
+                </td>
+            </tr>
+        </table>
+
+        <button type="button" class="btn btn-primary btn-default" data-target="#modal-retrospective" data-toggle="modal">add retrospective</button>
+        
+        <label for="Filterbydate">Filter by date</label> 
+        <input class="form-control" id="Filterbydate" type="date" placeholder="dd-MM-yyyy" min="1900-01-01" max="2060-12-31" ng-model="filterDate">
+        <button type="button" class="btn btn-default" ng-click="filter(filterDate | date : 'dd-MM-yyyy'); filterDate = null">Filter</button>
+    </div>
+</div>
+
+
+
+@helper FeedbackForm()
+{
+    <div id="modal-feedback" class="modal  " tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form name="feedForm" ng-submit="createFeedback(retrospectiveName, Feedback)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Add feed to {{retrospectiveName}}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="Name">Name</label>
+                                <input type="text" id="Name" class="form-control" placeholder="Name" ng-model="Feedback.NameCreatedBy" required>
+                            </div> 
+                            <div class="form-group col-md-6">
+                                <label for="Type">Type</label>
+                                <select id="Type" class="form-control" ng-model="Feedback.Type" ng-options="s as s for s in  ['@(string.Join("', '", Enum.GetNames(typeof(FeedbackType))))']" required>
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="Body">Body</label> 
+                                <textarea type="text" id="Body" class="form-control" placeholder="Body" ng-model="Feedback.Body" required></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close without saving</button>
+                        <button type="submit" class="btn btn-default">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
+
+@helper RetrospectiveForm()
+{
+    <div id="modal-retrospective" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="retrospectiveForm" ng-submit="create(retrospective)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Add feed to {{retrospectiveName}}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="retrospectiveName">Name</label>
+                                <input type="text" id="retrospectiveName" class="form-control" placeholder="Name" ng-model="retrospective.Name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Date">Date</label>
+                                <input class="form-control" id="Date" type="date" placeholder="dd-MM-yyyy" min="1900-01-01" max="2060-12-31" ng-model="retrospective.Date" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="Body">Summary</label>
+                                <textarea type="text" id="Summary" class="form-control" placeholder="Summary" ng-model="retrospective.Summary"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="retrospectiveParticipant">Participants</label>
+                                <input type="text" id="retrospectiveParticipant" class="form-control" placeholder="Name" ng-model="participant">
+                                <button type="button" class="btn btn-default" ng-click="addParticipant(participant); participant = null">Add</button>
+                            </div>
+                            <div class="form-group col-md-6"> 
+                                 {{participants}} 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        {{error}}
+                        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close without saving</button>
+                        <button type="submit" class="btn btn-default">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
