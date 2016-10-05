@@ -3,7 +3,7 @@ Standart MS Web API. instead of [id] parameter in routes it uses [name], as it i
 Sis.Interview.Dal - contains data access logic as well as some buisseness logic, project simplicity allows to do it.
 midiaFormat supporting implemented in WebApiConfig.cs.
 
-##nterface
+##Interface
 Implemented using Angular. Controller can be find in scripts/app/RetrospectiveService.js
 Didn't care a lot about desing, but it was built using bootstrap.
 
