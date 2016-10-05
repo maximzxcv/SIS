@@ -12,5 +12,5 @@ Implemented using NLog. Never used before, so it was interesting to try.
 Support request tracing [Framwork/LoggingHandler.cs] and unhandled exceptions [Framwork/UnhandledExceptionFilterAttribute.cs]
 
 #Unit Testing
-Cover some functionality for retrospective CRUD service. 
+Covers some functionality for retrospective CRUD service. 
 
